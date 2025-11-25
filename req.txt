@@ -5,3 +5,6 @@ numpy
 matplotlib
 requests
 pytest
+streamlit
+sqlalchemy
+time

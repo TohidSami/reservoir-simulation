@@ -1,6 +1,8 @@
 # app.py
 from flask import Flask, jsonify , request , send_file
 import json
+import time
+from sqlalchemy.exc import OperationalError 
 from run_model import map_db_to_engine , run_simulation
 from models import db, SimulationCase, SimulationResult
 import numpy as np
@@ -24,9 +26,18 @@ def create_app():
     db.init_app(app)
     
     with app.app_context():
-        db.create_all()
-        print("--- Database Tables Checked/Created Successfully ---")
-
+        retries=5
+        while retries > 5:
+           try:
+            db.create_all()
+            print("--- Database Tables Checked/Created Successfully ---")
+            break
+           except OperationalError:
+              print(f"Database not ready yet... Retrying in 2 seconds ({retries} left)")
+              time.sleep(2)
+              retries -= 1
+        if retries == 0:
+            print("Error: Could not connect to Database after 5 attempts.")
     return app
 
 app = create_app()

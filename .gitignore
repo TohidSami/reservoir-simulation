@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+results/
+postgres_data/
+.vscode/
+*.pyc
+*.DS_Store

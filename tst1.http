@@ -1,0 +1,20 @@
+
+POST http://127.0.0.1:5000/api/simulation
+Content-Type: application/json
+
+{
+    "name": "API_Case_2",
+    "nx": 15, "ny": 15, "nz": 3,
+    "swc": 0.12, "sor": 0.25,
+    "inj_rate_target": 1000.0,
+    "prod_bhp_min": 2500.0,
+    "prod_rate_target":500,
+    "dt": 10,
+    "n_steps": 10
+}
+
+### plot 
+GET  http://127.0.0.1:5000/api/simulation/2/plot
+
+### well plot
+GET  http://127.0.0.1:5000/api/simulation/1/well_plot

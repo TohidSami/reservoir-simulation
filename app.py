@@ -19,7 +19,7 @@ def create_app():
        
 
         db_url='postgresql://admin:secretpassword@localhost:5433/reservoir_simulation'
-    
+    print(f"--> Connecting to Database at: {db_url}")
     app.config['SQLALCHEMY_DATABASE_URI'] =db_url 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -27,7 +27,7 @@ def create_app():
     
     with app.app_context():
         retries=5
-        while retries > 5:
+        while retries > 0:
            try:
             db.create_all()
             print("--- Database Tables Checked/Created Successfully ---")
